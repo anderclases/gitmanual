@@ -21,6 +21,11 @@ Una vez creado en la web, tráelo a tu equipo local utilizando el comando de clo
 
 ```bash
 git clone <url-de-tu-repositorio>
+```
+
+---
+
+
 ## 3. Preparar el Primer Commit
 
 Para registrar cambios en Git, seguimos un flujo de trabajo de preparación. En la siguiente captura se pueden ver estos primeros pasos:
@@ -41,7 +46,6 @@ Para registrar cambios en Git, seguimos un flujo de trabajo de preparación. En 
     
 - `git commit -m "hola"`
     Crea un commit cuyo mensaje es "hola".
-    
 
 ---
 
@@ -74,81 +78,70 @@ $ git commit -m "hola"
  create mode 100644 hola
 ```
 
-## 6. Conexión con github
-Ahhora escribimos el comando `git push`, para realizar el push, la terminal debe de estar conectada con nuestra cuenta de github.
+---
 
-Podemos ver que nos pide iniciar sesión.
+
+## 6. Conexión con github
+Ahora escribimos el comando `git push`, para realizar el push, la terminal debe de estar conectada con nuestra cuenta de github.
+
+Al hacer `git push` si no hemos enlazado nuestra cuenta de github con nuestra terminal nos va a pedir que iniciemos sesión.
+
 ![Login git local](images/login_git_local.png)
 
-Tras iniciar sesión nos pide autorizar el permiso
+Tras iniciar sesión nos pide autorizar el permiso, simplemente tenemos qu aceptar.
+
 ![autorizar git](images/autorizar_git_local.png)
+
+Al **haber enlazado nuestra terminal** con nuestra cuenta de github podemos ver cómo el push se completa y se puede ver el commit en la **interfaz online**.
 
 ![Commit hola](images/commit_hola.png)
 
-## 7. Verificar Commit
-Para que tus commits aparezcan con la etiqueta "Verified" en verde en GitHub, necesitas firmarlos digitalmente. GitHub utiliza el estándar GPG, SSH o S/MIME para verificar que el commit realmente lo hiciste tú.
+---
+
+## 7. Firmar y verificar Commit
+Para que tus commits aparezcan con la etiqueta "Verified" en verde en GitHub, necesitas **firmarlos digitalmente**. GitHub utiliza el estándar GPG, SSH o S/MIME para verificar que el commit realmente lo hiciste tú.
 GPG, que es el método más común.
 
 ### 7.1. Generar clave
+
+Mediante este comando iniciamos la **herramienta de generación de firmas**.
+- Se recomienda que el tamaño del RSA sea el maximo 4096.
+- Para pruebas es más cómodo usar llaves que no caducan. (opción 0)
+- Las firmas deben de estar relacionadas con una persona real y un email de contacto.
+    - Real name: Ander Duran
+    - Email address: miemail@gmail.com
 ```bash
 gpg --full-generate-key
-gpg (GnuPG) 2.4.8; Copyright (C) 2025 g10 Code GmbH
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.
-
-gpg: directory '/c/Users/andur/.gnupg' created
-Please select what kind of key you want:
-   (1) RSA and RSA
-   (2) DSA and Elgamal
-   (3) DSA (sign only)
-   (4) RSA (sign only)
-   (9) ECC (sign and encrypt) *default*
-  (10) ECC (sign only)
-  (14) Existing key from card
-Your selection? 1
-RSA keys may be between 1024 and 4096 bits long.
-What keysize do you want? (3072) 4096
-Requested keysize is 4096 bits
-Please specify how long the key should be valid.
-         0 = key does not expire
-      <n>  = key expires in n days
-      <n>w = key expires in n weeks
-      <n>m = key expires in n months
-      <n>y = key expires in n years
-Key is valid for? (0) 0 # Indica que no caduca nunca
-Key does not expire at all
-Is this correct? (y/N) y
-
-GnuPG needs to construct a user ID to identify your key.
-Real name: Ander Duran
-Email address: miemail@gmail.com
-Comment:
-You selected this USER-ID:
-    "Ander Duran <miemail@gmail.com>"
-
-Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
 ```
+
 ### 7.2. Habilitar clave en github
 #### 1. Generar una clave GPG
-Primero, lista tu clave para obtener el ID:
+Primero, **lista tus claves** para obtener el ID:
 ```bash
 gpg --list-secret-keys --keyid-format=LONG
 ```
 #### 2. Exportar la clave pública
-Copia el ID que aparece después de rsa4096/ (por ejemplo: 3AA5C34371567BD2). Luego expórtala:
+**Copia el ID** que aparece después de rsa4096/ (por ejemplo: 3AA5C34371567BD2). Luego expórtala:
 ```bash
 gpg --armor --export TU_ID_DE_CLAVE
 ```
 #### 3. Añadir la clave a GitHub
-1. Ve a Settings > SSH and GPG keys > New GPG key.
+1. Ve a Settings > SSH and GPG keys > **New GPG key**.
 2. Pega el bloque de texto que empieza por -----BEGIN PGP PUBLIC KEY BLOCK-----.
 
 #### 4. Configurar Git para firmar siempre
 Ejecuta estos comandos en tu terminal para que Git firme tus commits automáticamente:
+
+Establece tu clave para que sea la firmante.
 ```bash
 git config --global user.signingkey TU_ID_DE_CLAVE
+```
+
+Haz que las firmas ocurran por defecto.
+```bash
 git config --global commit.gpgsign true
 ```
+
 
 #### 5. Resultado final 
 
@@ -156,17 +149,20 @@ Este es el resultado final que esperamos
 ![Commit verificado](images/commit_verificado.png)
 
 #### 6. Mejorar experiencia
-Para que no nos pida siempre la clave
-
-Exportar la clave generada
+Se considera que la herramienta de gpg4win es mejor que la que tiene pordefecto la terminal, además aquí podemos guardar la clave para redicir la cantidad de veces que debemos escribirla.
+**Listamos las claves** para ver la que queremos exportar:
 ```bash
 gpg --list-secret-keys --keyid-format=LONG
-gpg --homedir "/c/Users/andur/.gnupg" --export-secret-keys --armor TU_ID_DE_CLAVE > mi_clave_pri
-vada.asc
+```
+
+Desde git bash, vamos a exportar la clave que hemos generado, las claves se almacenan en username/.gnupg y hay que tener el cuenta que el path absoluto es el modelo de git bash. 
+Exportar la clave generada
+```bash
+gpg --homedir "/c/Users/andur/.gnupg" --export-secret-keys --armor TU_ID_DE_CLAVE > mi_clave_privada.asc
 ```
 
 **1. Descarga e Instalación**
-1. Ve a la página oficial: gpg4win.org.
+1. Ve a la página oficial: [gpg4win.org](https://gpg4win.org/).
 2. Haz clic en el botón Download. (Puedes poner $0 en la donación si quieres ir directo a la descarga gratuita).
 3. Ejecuta el instalador .exe.
 4. En la selección de componentes, asegúrate de que Kleopatra esté marcado (es el gestor gráfico de claves que facilita mucho el trabajo).
@@ -193,3 +189,67 @@ UsaKleopatra para importar `mi_clave_privada.asc`.
 2. Escribe tu contraseña.
 3. Marca la casilla que dice "Save in password manager" o "Recordar contraseña".
 4. A partir de ahora, Git firmará tus commits automáticamente sin interrumpirte.
+
+---
+
+## 8. Analizando Commits firmados
+
+A nivel de github puede ocurrir que una firma aparezca como no ferificada, eso significa que el commit a nivel local ha sido correctamete firmado, pero que la clave GPG o SSH que se ha usado para hacer la firma no esta añadida como una clave reconocida por nuestro usuario de git, de manera que está firmado pero no verificado.
+
+![Commit no verificado](images/commits_firmados_sin_verificar.png)
+
+A nivel de terminal también podemos comprobar las firmas, este comando nos informa de los commits que se han hecho y su están correctamente firmados.
+- G firma correcta.
+- E Firma en la que detecta un error.
+- N siginifica no firmado.
+```bash
+$ git log --pretty='%h %s [%G?]'
+fc59769 mensaje [E]
+2df1558 aa [E]
+2d3ac0f aa [N]
+632b715 clase [N]
+e1900bd cuato commit [G]
+```
+
+En este caso estos errores son nomrmales, si vemos en github aparecen correctamente firmadas, pero en cambio mi terminal detecta una firma pero no les da el OK con [G]. Esto se debe a que esas firmas se han hecho en otro equipo con otra clave GPG, por eso git lo reconoce pero el equipo en el que se ha ejecutado el comando no las reconoce.
+
+
+![Commit no verificado](images/fimas_comparar_con_terminal.png)
+
+### Posibles errores
+
+También nos puede pasar que al tratar de hacer un commit recibamos un error:
+```bash
+git commit -m "prueba commit"
+```
+> [!ERROR] 
+> error: Couldn't load public key CLAVE_FIRMA: No such file or directory?
+
+### Reinicio de trabajo
+
+Este error significa que no está encontrando la key, es un error a nivel local ya que no puede firmar el commit. esto ocurre si hemos configurado mal la firma, la recomendacion es **borrar todo y empezar de 0**.
+
+Comando para 
+```bash
+gpg --delete-secret-key CLAVE_FIRMA
+```
+
+Una de las causas posibles del conflicto y es si se han habilitado las firmas por ssh.
+```bash 
+git config --global --unset user.signingkey # Elimina la clave GPG configurada para firmar commits
+git config --global --unset gpg.program # Elimina el programa GPG configurado para firmar commits
+git config --global --unset commit.gpgsign # Elimina la opción que obliga a firmar todos los commits
+```
+
+
+
+### Configuracion esperada
+Esta es la configuración mínima esperada para que las firmas nos funcionen.
+```bash
+$ git config --global --list
+user.email=TU_EMAIL
+user.name=GITHUB_USERNAME
+user.signingkey=CLAVE_FIRMA
+commit.gpgsign=true
+gpg.program=C:\Program Files (x86)\GnuPG\bin\gpg.exe
+```

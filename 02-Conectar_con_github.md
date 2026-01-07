@@ -253,3 +253,31 @@ user.signingkey=CLAVE_FIRMA
 commit.gpgsign=true
 gpg.program=C:\Program Files (x86)\GnuPG\bin\gpg.exe
 ```
+
+
+
+### Errores y solución
+#### Sistema de firma no funciona, cliente desactivado.
+Palabra clave del error: **No Keybox daemon running?**
+```bash
+$ git commit -m "e"
+error: gpg failed to sign the data:
+gpg: can't connect to the keyboxd: Falló la llamada de conexión IPC?
+gpg: error al abrir base de datos de claves: No Keybox daemon running?
+gpg: omitido "F6503517A7B672F5": Input/output error?
+[GNUPG:] INV_SGNR 0 F6503517A7B672F5?
+[GNUPG:] FAILURE sign 33587249?
+gpg: signing failed: Input/output error?
+
+fatal: failed to write commit object
+```
+Para solucionar reactivar firma
+```bash
+gpgconf --kill all
+```
+
+```bash
+gpgconf --launch gpg-agent
+```
+
+Podemos comprobar que nuestro cliente de firma gpg esta activo y funcionando abriendo la aplicación Kleopatra

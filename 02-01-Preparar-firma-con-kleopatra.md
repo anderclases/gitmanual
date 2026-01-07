@@ -15,6 +15,7 @@ git config --global commit.gpgsign true
 ```
 
 ## 4️⃣ Decirle a Git que use GPG (Windows + Kleopatra)
+(Normalmente no va a ser necesario, pero asegura que no haya conflictos con algún otro cliente GPG instalado)
 ```bash
 git config --list
 git config --global gpg.program "PAHT_DE_GPG"

@@ -19,6 +19,7 @@ Puedses descargarlo [aquí](images/git-bash.ico)
 * Haz clic en el botón de la flecha hacia abajo (v) en la barra superior y selecciona **Configuración**.
 
 > ![Configuración de Windows Terminal](images/configuracion_windows_terminal.png)
+
 > *Ubicación del menú de configuración.*
 
 ### 4. Crear un Nuevo Perfil

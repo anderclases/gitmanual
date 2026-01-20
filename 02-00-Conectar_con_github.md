@@ -281,3 +281,22 @@ gpgconf --launch gpg-agent
 ```
 
 Podemos comprobar que nuestro cliente de firma gpg esta activo y funcionando abriendo la aplicación Kleopatra
+
+#### No secret key
+
+```
+error: gpg failed to sign the data:
+gpg: skipped "GITUSERNAME <MAILNAME@gmail.com>": No secret key
+[GNUPG:] INV_SGNR 9 GITUSERNAME <MAILNAME@gmail.com>
+[GNUPG:] FAILURE sign 17
+gpg: signing failed: No secret key
+
+fatal: failed to write commit object
+```
+
+Es posible que tu git local no sepa que clave de kleopatra debe usar para realizar la  firma, haz este comando para informar que firma debe usar.
+`git config --global user.signingkey HUELLA_DIGITAL`
+
+Para conseguir la huella digital doble click a la firma que queremos usar
+
+

@@ -7,6 +7,8 @@ Se puede observar que el commit inicial muestra el usuario correcto que coindide
 
 Al ser un commit que se realiza desde la cuenta de github, no hay ninguna configuración local que afecte a este commit.
 
+---
+
 ### Usuario correcto y firma verificada
 ![Usuario y firma correctos](./images/02/Usuario_bien_firma_bien.png)
 Para que el commit se vea en este estado el user.email y user.name deben de coincidir con el de la cuenta de github.
@@ -18,6 +20,7 @@ Además pone verified, para que esto ocurra se deben de cumplir estas 3 condicio
 
 3. En el Commit: El correo con el que haces el commit debe ser el mismo que GitHub tiene asociado a tu cuenta.
 
+---
 
 ### Usuario coincide pero sin firmar
 ![Usuario coincide sin firma](./images/02/usuario_coincide_sin_firmar.png)
@@ -49,6 +52,7 @@ Para editar mi repositorio es necesario crear una credencial de acceso. Cuando l
 
 ![Administrados de credenciales de windows](./images/02/windows_admin_credenciales.png)
 
+---
 
 ### Usuario no coincide y firma no verificada
 ![Error de coincidencia y firma](./images/02/usuario_no_coincide_firma_no_verificada.png)
@@ -67,6 +71,8 @@ git config --list | grep user
 user.email=anderduirakasle@gmail.com
 user.name=anderclases
 ```
+
+---
 
 ### Usuario coincide pero firma no verificada
 

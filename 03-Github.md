@@ -7,6 +7,7 @@ Este manual describe los pasos fundamentales para crear un repositorio, clonarlo
 ## 1. Inicio y Creación del Repositorio
 
 1. **Inicia sesión** en tu cuenta de [GitHub](https://github.com).
+    - Si no tienes una cuenta es posible que tengas que dedicarle un tiempo hay muchos procesos y validación y captcha.
 2. **Crea un nuevo repositorio** haciendo clic en el botón **"+"** en la esquina superior derecha.
 
 ![Nuevo Repositorio](images/nuevo_repositorio.png)
@@ -24,7 +25,6 @@ git clone <url-de-tu-repositorio>
 ```
 
 ---
-
 
 ## 3. Preparar el Primer Commit
 

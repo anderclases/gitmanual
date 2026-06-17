@@ -1,7 +1,7 @@
 ## Estados de Commit en Git
 
 ### Estado Inicial
-![Estado Inicial](./images/02/initial.png)
+![Estado Inicial](./images/firma/initial.png)
 
 Se puede observar que el commit inicial muestra el usuario correcto que coindide con la cuenta de git desde la que se ha creado el repositorio.
 
@@ -10,7 +10,7 @@ Al ser un commit que se realiza desde la cuenta de github, no hay ninguna config
 ---
 
 ### Usuario correcto y firma verificada
-![Usuario y firma correctos](./images/02/Usuario_bien_firma_bien.png)
+![Usuario y firma correctos](./images/firma/Usuario_bien_firma_bien.png)
 Para que el commit se vea en este estado el user.email y user.name deben de coincidir con el de la cuenta de github.
 
 Además pone verified, para que esto ocurra se deben de cumplir estas 3 condiciones:
@@ -23,7 +23,7 @@ Además pone verified, para que esto ocurra se deben de cumplir estas 3 condicio
 ---
 
 ### Usuario coincide pero sin firmar
-![Usuario coincide sin firma](./images/02/usuario_coincide_sin_firmar.png)
+![Usuario coincide sin firma](./images/firma/usuario_coincide_sin_firmar.png)
 
 Este es el nombre de usuario y email que estan realizando el commit oficialmente. Simplemente significa que el commit ha sido realizado afimrnado que ese usuario y contraseña son esos. 
 
@@ -38,7 +38,7 @@ git config --global user.name "Bill Gates"
 git config --global user.email "inventado@gmail.com"
 ```
 
-![user.name y user.email manipulados](./images/02/usernamemail_inventado.png)
+![user.name y user.email manipulados](./images/firma/usernamemail_inventado.png)
 
 Podemos ver cómo github prioriza el user email para mostrar cual es la cuanta que cree que ha hecho el commit. Por eso al cambiar solo el user.name sigue mostrando mi cuenta personal. Mientras que cuando cambio el email muestra el usuario existente en el sistema de github que está registrado a ese email.
 
@@ -50,12 +50,12 @@ No, para editar mi repositorio github no utiliza mi user.name ni user.email (est
 
 Para editar mi repositorio es necesario crear una credencial de acceso. Cuando lo hacemos desde windows podemos ver si nuestra credencial existe en el administrador de credenciales.
 
-![Administrados de credenciales de windows](./images/02/windows_admin_credenciales.png)
+![Administrados de credenciales de windows](./images/firma/windows_admin_credenciales.png)
 
 ---
 
 ### Usuario no coincide y firma no verificada
-![Error de coincidencia y firma](./images/02/usuario_no_coincide_firma_no_verificada.png)
+![Error de coincidencia y firma](./images/firma/usuario_no_coincide_firma_no_verificada.png)
 
 Podemos ver que la cuenta del usuario está en gris y que está mostrando un nombre de usuario. 
 
@@ -86,9 +86,3 @@ Con el comando `gpg --list-secret-keys --keyid-format=LONG` se puden listar las 
 Luego podemos exportar la clave pública `gpg --armor --export TU_ID`
 
 Que si la subimos a nuestra cuenta de github aceptará esos commits como nuestros.
-
-Nosotros firmamos con nuestra clave privada que está ubicada en nuestro ordenador. Github al tener nuestra clave publica guardada puede comporbar que el commit ha sido firmado con esa clave privada.
-
-Una buena metafora de la criptografía asimetrica es la de la llave y el candado.
-
-![Ejemplo criptografia asimetrica](./images/02/Cripto_asimetrica.png)
